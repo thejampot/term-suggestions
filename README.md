@@ -9,6 +9,12 @@ The project includes:
 - Automated tests covering the main edge cases
 - A clean separation between UI and algorithmic logic
 
+## Live Demo
+
+Try the application here:
+
+https://TON-URL-VERCEL.vercel.app
+
 ## Objective
 
 Given a search term and a list of possible terms, return the N closest matches.
