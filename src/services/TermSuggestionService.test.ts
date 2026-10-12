@@ -20,6 +20,15 @@ describe("TermSuggestionService", () => {
     ).toBe(1);
   });
 
+  it("finds the best alignment for graisse and agressif", () => {
+    expect(
+      TermSuggestionService.getDifferenceScore(
+        "graisse",
+        "agressif"
+      )
+    ).toBe(4);
+  });
+
   it("returns 2 for graisse", () => {
     expect(
       TermSuggestionService.getDifferenceScore("gros", "graisse")
