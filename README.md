@@ -13,7 +13,7 @@ The project includes:
 
 Try the application here:
 
-https://TON-URL-VERCEL.vercel.app
+https://term-suggestions.vercel.app
 
 ## Objective
 
