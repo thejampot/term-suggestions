@@ -2,6 +2,13 @@
 
 Small TypeScript application implementing the term suggestion algorithm described in the technical test.
 
+The project includes:
+
+- A reusable TypeScript service containing the business logic
+- A simple Next.js interface to demonstrate the algorithm
+- Automated tests covering the main edge cases
+- A clean separation between UI and algorithmic logic
+
 ## Objective
 
 Given a search term and a list of possible terms, return the N closest matches.
@@ -12,21 +19,53 @@ Character insertion is not considered, therefore terms shorter than the search t
 
 ## Ranking
 
-Suggestions are ranked using:
+Suggestions are ranked using the following rules:
 
 1. Lowest difference score
 2. Closest length to the search term
 3. Alphabetical order
 
-## Implementation
+## How the algorithm works
 
-The business logic is contained in:
+For candidates with the same length as the search term, characters are compared directly.
 
-`src/services/TermSuggestionService.ts`
+For candidates longer than the search term, a sliding window is used.
 
-The user interface is intentionally separated from the algorithm so the suggestion service can be tested and reused independently.
+The window has the same length as the search term and moves through the candidate word.
 
-For candidates longer than the search term, a sliding window is used to compare every possible substring of the same length as the search term.
+For each position, the algorithm counts how many characters would need to be replaced.
+
+The lowest score found is kept.
+
+Example:
+
+Search term:
+
+`gros`
+
+Candidate:
+
+`agressif`
+
+Possible 4-character sections:
+
+- `agre`
+- `gres`
+- `ress`
+- `essi`
+- `ssif`
+
+The best match is:
+
+`gres`
+
+Compared with:
+
+`gros`
+
+Only one character differs, therefore the score is:
+
+`1`
 
 ## Example
 
@@ -50,11 +89,21 @@ Number of suggestions:
 
 Expected result:
 
-1. gros — score 0
-2. gras — score 1
+1. `gros` — score 0
+2. `gras` — score 1
 
-## Run locally
+## Project structure
 
-```bash
-npm install
-npm run dev
+```text
+src/
+├── app/
+│   ├── globals.css
+│   └── page.tsx
+├── components/
+│   ├── SearchForm.tsx
+│   └── SuggestionList.tsx
+├── services/
+│   ├── TermSuggestionService.ts
+│   └── TermSuggestionService.test.ts
+└── types/
+    └── suggestion.ts
