@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Term Suggestions - Technical Test
 
-## Getting Started
+Small TypeScript application implementing the term suggestion algorithm described in the technical test.
 
-First, run the development server:
+## Objective
+
+Given a search term and a list of possible terms, return the N closest matches.
+
+Similarity is determined by the minimum number of character replacements required to match the search term.
+
+Character insertion is not considered, therefore terms shorter than the search term are excluded.
+
+## Ranking
+
+Suggestions are ranked using:
+
+1. Lowest difference score
+2. Closest length to the search term
+3. Alphabetical order
+
+## Implementation
+
+The business logic is contained in:
+
+`src/services/TermSuggestionService.ts`
+
+The user interface is intentionally separated from the algorithm so the suggestion service can be tested and reused independently.
+
+For candidates longer than the search term, a sliding window is used to compare every possible substring of the same length as the search term.
+
+## Example
+
+Search term:
+
+`gros`
+
+Available terms:
+
+- gros
+- gras
+- graisse
+- agressif
+- go
+- ros
+- gro
+
+Number of suggestions:
+
+`2`
+
+Expected result:
+
+1. gros — score 0
+2. gras — score 1
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

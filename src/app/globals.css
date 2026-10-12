@@ -1,26 +1,254 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  background: #f2f2f2;
+  color: #222;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.pageWrapper {
+  width: 100%;
+  max-width: 980px;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7b2cbf;
+}
+
+.pageTitle h1 {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 700;
+  color: #222;
+}
+
+.splitCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: white;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.leftPanel {
+  padding: 42px 38px;
+  background: linear-gradient(135deg, #7b2cbf, #3a0ca3);
+  color: white;
+}
+
+.rightPanel {
+  padding: 42px 38px;
+  background: #ffffff;
+  color: #222;
+}
+
+.leftPanel h2,
+.rightPanel h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.panelText {
+  margin: 0 0 28px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.lightText {
+  color: #666;
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: white;
+  padding: 12px 4px;
+  font-size: 15px;
+  outline: none;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.submitButton {
+  margin-top: 4px;
+  align-self: flex-start;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff4d9d, #d63384);
+  color: white;
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(214, 51, 132, 0.28);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.resultsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #f8f8fb;
+  border: 1px solid #ececf3;
+}
+
+.resultLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.resultIndex {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #ede7ff;
+  color: #5a189a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.resultTerm {
+  font-size: 17px;
+  font-weight: 700;
+  color: #222;
+}
+
+.resultMeta {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #777;
+}
+
+.scoreBadge {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff0d9;
+  color: #9a6700;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.scoreBadge.perfect {
+  background: #def7e5;
+  color: #1b7f46;
+}
+
+.emptyState {
+  margin-top: 12px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #f8f8fb;
+  border: 1px solid #ececf3;
+  color: #666;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .splitCard {
+    grid-template-columns: 1fr;
+  }
+
+  .pageTitle h1 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 20px 14px;
+  }
+
+  .leftPanel,
+  .rightPanel {
+    padding: 28px 22px;
+  }
+
+  .leftPanel h2,
+  .rightPanel h2 {
+    font-size: 28px;
+  }
+
+  .resultRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
